@@ -7,12 +7,8 @@ library(dplyr)
 #NEI <- readRDS("summarySCC_PM25.rds")
 #SCC <- readRDS("Source_Classification_Code.rds")
 
-x <- c(1999, 2002, 2005, 2008)
-y <- c()
+Baltimore <- filter(NEI, fips == "24510")
 
-for (i in x){
-  temp <- filter(NEI, year == i & fips == "24510")
-  y <- c(y,sum(temp$Emissions))
-}
+agg <- aggregate(Baltimore$Emissions,list(year = Baltimore$year),sum)
 
-plot(x,y)
+plot(agg$year,agg$x)
