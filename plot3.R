@@ -8,13 +8,8 @@ library(dplyr)
 #NEI <- readRDS("summarySCC_PM25.rds")
 #SCC <- readRDS("Source_Classification_Code.rds")
 
-x <- c(1999, 2002, 2005, 2008)
-y <- c()
-gplot <- ggplot(aes(emissions from PM2.5,year))
+Baltimore <- filter(NEI, fips == "24510")
 
-for (i in x){
-  temp <- filter(NEI, year == i & fips == "24510")
-  g <- g + 
-}
+agg <- aggregate(Baltimore$Emissions,list(year = Baltimore$year, type = Baltimore$type),sum)
 
-plot(x,y)
+print(qplot(year, x, data = agg, facets = type ~.) + ylab("PM2.5 emissions (tons)"))
